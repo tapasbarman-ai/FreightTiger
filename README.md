@@ -34,7 +34,7 @@ AI Intern Case Study/
 ## 2. Core Metrics & Math Parity
 
 ### Metric Definitions
-- **Unit Cost**: $\text{Cost per tonne-km} = \frac{\sum \text{freight\_cost\_inr}}{\sum (\text{quantity\_tonnes} \times \text{distance\_km})}$ grouped by calendar week (`week_of` = Monday date).
+- **Unit Cost**: $\text{Cost per tonne-km} = \frac{\sum \text{Freight Cost (INR)}}{\sum (\text{Quantity (Tonnes)} \times \text{Distance (km)})}$ grouped by calendar week (`week_of` = Monday date).
 - **vs. own history**: Trailing 8-week rolling average strictly prior to the current week (no lookahead). If $< 8$ weeks exist, all available prior weeks are used without padding.
 - **vs. similar routes**: Average unit cost in the same week across all other routes sharing the same `route_type` (`Short`/`Medium`/`Long`), strictly excluding the route itself.
 
