@@ -47,7 +47,45 @@ AI Intern Case Study/
 
 ---
 
-## 3. RAG Architecture & Anti-Hallucination Guardrails
+## 3. Full Audit Results & Anomaly Breakdown
+
+The pipeline analyzed **2,940 shipments** across **312 route-weeks** and detected **20 anomalous route-weeks** (cost surge >= 15% vs own 8-week history OR >= 20% vs peer routes).
+
+### Audit Summary Statistics
+- **Total Shipments Evaluated**: 2,940
+- **Total Route-Weeks Evaluated**: 312
+- **Anomalies Detected**: 20
+- **Justified Surges (`flagged = No`)**: 3 (15.0%) - verified against real-world disruption events
+- **Flagged for Review (`flagged = Yes`)**: 17 (85.0%) - unexplained spikes or non-rate-impacting trap notes
+
+### Audited Submission Summary (`output_submission.csv`)
+
+| Route | Week Of | Unit Cost | vs Own History | vs Peer Routes | Flagged | Note ID | Audit Verdict Summary |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Ahmedabad-Mumbai** | 2025-01-20 | 3.29 | +29.5% | +22.5% | **No (justified)** | N002 | Makar Sankranti festival driver crunch; temporary surcharge justified |
+| **Chennai-Bangalore** | 2025-02-24 | 3.58 | +31.5% | +38.7% | **No (justified)** | N001 | Severe cyclone flooding forced detours and operational rerouting |
+| **Chennai-Bangalore** | 2025-03-03 | 3.48 | +22.8% | +32.0% | **No (justified)** | N001 | Ongoing flood recovery and detour costs justified |
+| **Chennai-Bangalore** | 2025-03-10 | 3.57 | +22.1% | +33.8% | **Yes** | - | Trap note N009: repairs completed; persistent spike unjustified |
+| **Chennai-Bangalore** | 2025-03-17 | 3.47 | +13.7% | +33.5% | **Yes** | - | Route restored to normal (N009); peer premium remains unjustified |
+| **Delhi-Jaipur** | 2024-11-11 | 4.17 | +35.5% | +21.0% | **Yes** | - | Unexplained surge (+35.5% own, +21.0% peer); zero external events |
+| **Delhi-Jaipur** | 2024-11-18 | 4.09 | +27.6% | +19.7% | **Yes** | - | Follow-up elevated rate (+27.6% own); requires carrier billing audit |
+| **Mumbai-Pune** | 2025-06-23 | 3.76 | +6.2% | +20.6% | **Yes** | - | Peer corridor premium (+20.6%); no operational disruption logged |
+| **Mumbai-Pune** | 2025-09-15 | 3.98 | +9.2% | +23.6% | **Yes** | - | Trap note N006: market demand stable; cost surge unjustified |
+| **Mumbai-Pune** | 2025-10-06 | 3.94 | +5.4% | +22.9% | **Yes** | - | Trap note N006: normal capacity; rate premium uncorroborated |
+| **Mumbai-Pune** | 2025-10-20 | 4.10 | +7.7% | +24.8% | **Yes** | - | Trap note N010: GPS mandate absorbed without rate increase |
+| **Mumbai-Pune** | 2025-10-27 | 4.07 | +5.5% | +28.3% | **Yes** | - | Mandate absorbed without rate hike (N010); flagged for review |
+| **Mumbai-Pune** | 2025-11-03 | 4.20 | +7.4% | +24.1% | **Yes** | - | Mandate absorbed without rate hike (N010); flagged for review |
+| **Mumbai-Pune** | 2025-11-10 | 3.97 | -0.1% | +21.4% | **Yes** | - | Peer group premium (+21.4%); no valid rate surcharge |
+| **Mumbai-Pune** | 2025-11-17 | 4.32 | +8.9% | +31.6% | **Yes** | - | Severe peer premium (+31.6%); N010 absorbed without rate hike |
+| **Mumbai-Pune** | 2025-11-24 | 4.16 | +3.0% | +23.0% | **Yes** | - | Persistent peer premium (+23.0%); flagged for investigation |
+| **Mumbai-Pune** | 2025-12-01 | 4.39 | +7.7% | +37.4% | **Yes** | - | Major peer premium (+37.4%); uncorroborated carrier rate surge |
+| **Mumbai-Pune** | 2025-12-08 | 4.43 | +7.2% | +38.8% | **Yes** | - | Extreme peer premium (+38.8%); no operational context logged |
+| **Mumbai-Pune** | 2025-12-15 | 4.39 | +4.4% | +35.5% | **Yes** | - | Extended rate anomaly (+35.5% peer); carrier inquiry required |
+| **Mumbai-Pune** | 2025-12-22 | 4.49 | +5.7% | +38.9% | **Yes** | - | Peak rate anomaly (+38.9% peer); flagged for freight reconciliation |
+
+---
+
+## 4. RAG Architecture & Anti-Hallucination Guardrails
 
 ### ChromaDB Vector Search + Temporal Matching
 1. **Indexing**: 10 context notes are embedded into **ChromaDB** using `text-embedding-3-small`.
@@ -59,7 +97,7 @@ AI Intern Case Study/
 
 ---
 
-## 4. DeepEval Evaluation Benchmark
+## 5. DeepEval Evaluation Benchmark
 
 Evaluated in `src/eval_harness.py` using **DeepEval** (`HallucinationMetric`) and ground-truth validation:
 
@@ -77,7 +115,7 @@ Evaluated in `src/eval_harness.py` using **DeepEval** (`HallucinationMetric`) an
 
 ---
 
-## 5. Reproducibility Check (3 Runs)
+## 6. Reproducibility Check (3 Runs)
 
 Verified across 3 untouched full runs (`uv run python main.py verify`):
 - All numbers, flags, and cited note IDs are **100% identical** across passes (0 diffs).
@@ -85,7 +123,7 @@ Verified across 3 untouched full runs (`uv run python main.py verify`):
 
 ---
 
-## 6. Token & Cost Log: Model Comparison
+## 7. Token & Cost Log: Model Comparison
 
 Full run over all ~2,940 shipment records (20 anomalous route-weeks audited):
 
@@ -99,7 +137,7 @@ Full run over all ~2,940 shipment records (20 anomalous route-weeks audited):
 
 ---
 
-## 7. Execution Commands
+## 8. Execution Commands
 
 ### Primary Commands
 ```bash
