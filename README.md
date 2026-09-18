@@ -9,24 +9,24 @@ Autonomous shipping cost audit assistant that monitors freight records, detects 
 ```
 AI Intern Case Study/
 |-- src/
-|   |-- models.py               # Domain models, dataclasses & ModelCatalog
-|   |-- data_loader.py          # Data ingestion and normalization
-|   |-- metrics_calculator.py   # Unit cost, 8-week rolling & peer baselines
-|   |-- anomaly_detector.py     # Statistical cost surge detection
-|   |-- rag_retriever.py        # ChromaDB vector store + temporal retrieval
-|   |-- evaluator.py            # Guardrail engine & LangChain LCEL reasoning
-|   |-- pipeline.py             # End-to-end orchestration & CSV export
-|   |-- eval_harness.py         # DeepEval & ground-truth benchmark suite
+|   |-- models.py
+|   |-- data_loader.py
+|   |-- metrics_calculator.py
+|   |-- anomaly_detector.py
+|   |-- rag_retriever.py
+|   |-- evaluator.py
+|   |-- pipeline.py
+|   |-- eval_harness.py
 |-- data/
-|   |-- shipment_records.csv    # 2,940 raw shipment records
-|   |-- context_notes.csv       # 10 context notes with real events & traps
-|   |-- sample_output_format_v2.csv # Contract schema definition
+|   |-- shipment_records.csv
+|   |-- context_notes.csv
+|   |-- sample_output_format_v2.csv
 |-- output/
-|   |-- output_submission.csv   # Audited submission CSV
+|   |-- output_submission.csv
 |-- docs/
-|   |-- FreightTiger_Intern_CaseStudy.pdf # Case study brief
-|-- main.py                     # CLI entrypoint
-|-- README.md                   # Technical documentation & cost report
+|   |-- FreightTiger_Intern_CaseStudy.pdf
+|-- main.py
+|-- README.md
 ```
 
 ---
