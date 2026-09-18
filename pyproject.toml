@@ -1,0 +1,17 @@
+[project]
+name = "ai-intern-case-study"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=1.5.9",
+    "deepeval>=4.2.3",
+    "langchain-chroma>=1.1.0",
+    "langchain-core>=1.6.3",
+    "langchain-openai>=1.6.2",
+    "numpy>=2.5.3",
+    "openai>=3.15.0",
+    "pandas>=3.0.6",
+    "python-dotenv>=1.2.3",
+]
